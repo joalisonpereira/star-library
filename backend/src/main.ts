@@ -13,8 +13,7 @@ async function bootstrap() {
 
   //Swagger
   const config = new DocumentBuilder()
-    .setTitle('Library API')
-    .setDescription('Dummy API library')
+    .setTitle('Start Library')
     .setVersion('1.0')
     .build();
 
