@@ -28,6 +28,7 @@ export interface Book extends Timestamps {
 }
 
 export interface BookState {
-  data: User[];
+  data: Book[];
   loading: boolean;
+  modal: boolean;
 }

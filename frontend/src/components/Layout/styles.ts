@@ -40,4 +40,19 @@ export const Header = styled.header`
       font-weight: bold;
     }
   }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .nav {
+      a {
+        text-decoration: none;
+        color: ${(props) => props.theme.basic};
+        font-weight: 600;
+        :nth-child(2) {
+          margin-left: ${(props) => props.theme.safeMargin * 2}px;
+        }
+      }
+    }
+  }
 `;

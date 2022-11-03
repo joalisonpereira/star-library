@@ -3,24 +3,23 @@ import { FormGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "src/components/Button";
 import Input from "src/components/Input";
-import { UserActions } from "src/store/slices/users";
+import { BookActions } from "src/store/slices/books";
 import { Container, ContainerProps } from "./styles";
 
-export interface ModalUserProps extends ContainerProps {}
+export interface ModalBookProps extends ContainerProps {}
 
-function ModalUser(props: ModalUserProps) {
+function ModalBook(props: ModalBookProps) {
   const dispatch = useDispatch();
 
-  const { modal } = useSelector((state) => state.users);
+  const { modal } = useSelector((state) => state.books);
 
   const formik = useFormik({
     initialValues: {
       name: "",
-      email: "",
-      password: "",
+      author: "",
     },
     onSubmit: (values) => {
-      dispatch(UserActions.add(values));
+      dispatch(BookActions.add(values));
     },
   });
 
@@ -37,7 +36,7 @@ function ModalUser(props: ModalUserProps) {
   // }, [modal, formik]);
 
   function closeModal() {
-    dispatch(UserActions.setModal(false));
+    dispatch(BookActions.setModal(false));
   }
 
   return (
@@ -55,21 +54,12 @@ function ModalUser(props: ModalUserProps) {
             />
           </FormGroup>
           <FormGroup>
-            <label className="text-white">Email</label>
+            <label className="text-white">Autor</label>
             <Input
-              type="email"
-              placeholder="Email"
-              onChange={formik.handleChange("email")}
-              value={formik.values.email}
-            />
-          </FormGroup>
-          <FormGroup className="mt-3">
-            <label className="text-white">Senha</label>
-            <Input
-              type="password"
-              placeholder="**********"
-              onChange={formik.handleChange("password")}
-              value={formik.values.password}
+              type="text"
+              placeholder="Livro"
+              onChange={formik.handleChange("author")}
+              value={formik.values.author}
             />
           </FormGroup>
         </Container.Body>
@@ -83,4 +73,4 @@ function ModalUser(props: ModalUserProps) {
   );
 }
 
-export default ModalUser;
+export default ModalBook;

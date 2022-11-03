@@ -14,8 +14,6 @@ function* fetch({}: ReturnType<typeof UserActions.fetch>) {
 
 function* add({ payload }: ReturnType<typeof UserActions.add>) {
   try {
-    console.log(payload);
-
     yield call(api.post, `/users`, payload);
 
     yield put(UserActions.addSuccess());

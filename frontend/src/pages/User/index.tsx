@@ -30,7 +30,8 @@ function User({}: UserProps) {
     <Layout>
       <ModalUser />
       <Container className="container">
-        <div className="d-flex justify-content-end mt-3">
+        <div className="d-flex justify-content-between align-items-center mt-3">
+          <h3>Usuários</h3>
           <Button onClick={openModal} variant="primary">
             Novo
           </Button>
@@ -41,6 +42,7 @@ function User({}: UserProps) {
               <th>Id</th>
               <th>Nome</th>
               <th>Email</th>
+              <th>Livros</th>
             </tr>
           </thead>
           <tbody>
@@ -49,6 +51,7 @@ function User({}: UserProps) {
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
+                <td>{item.books?.length}</td>
                 <td>
                   <Button onClick={() => onRemove(item.id)} variant="danger">
                     X
