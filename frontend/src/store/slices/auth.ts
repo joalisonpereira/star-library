@@ -3,7 +3,7 @@ import { StorageKeys } from "src/config/Enums";
 import { AuthState } from "../types";
 
 const initialState: AuthState = {
-  access: sessionStorage.getItem(StorageKeys.accessToken) ?? "2",
+  access: sessionStorage.getItem(StorageKeys.accessToken),
   loading: false,
 };
 
