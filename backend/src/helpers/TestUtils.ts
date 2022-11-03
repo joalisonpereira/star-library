@@ -4,7 +4,6 @@ import { faker } from '@faker-js/faker';
 export class TestUtils {
   static makeUser(): Prisma.UserCreateManyInput {
     return {
-      id: Number(faker.random.numeric()),
       email: faker.internet.email(),
       name: faker.name.fullName(),
       password: faker.internet.password(),
@@ -13,7 +12,6 @@ export class TestUtils {
 
   static makeBook(): Prisma.BookCreateManyInput {
     return {
-      id: Number(faker.random.numeric()),
       name: faker.name.firstName(),
       author: faker.name.fullName(),
     };
@@ -21,7 +19,6 @@ export class TestUtils {
 
   static makeUserBook(): Prisma.UserBookCreateManyInput {
     return {
-      id: Number(faker.random.numeric()),
       bookId: Number(faker.random.numeric()),
       userId: Number(faker.random.numeric()),
       rate: Number(faker.random.numeric()),

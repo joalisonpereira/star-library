@@ -5,7 +5,7 @@ import { AppModule } from 'src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TestUtils } from 'src/helpers/TestUtils';
 
-describe('BooksController', () => {
+describe('UsersController', () => {
   let app: INestApplication;
 
   let prisma: PrismaService;
@@ -26,48 +26,48 @@ describe('BooksController', () => {
     await app.close();
   });
 
-  it('/books (GET)', async () => {
+  it('/users (GET)', async () => {
     const response = await request(app.getHttpServer())
-      .get('/books')
+      .get('/users')
       .expect(200);
 
     expect(Array.isArray(response.body)).toBe(true);
   });
 
-  it(`/books/:id (GET)`, async () => {
-    const book = await prisma.book.create({ data: TestUtils.makeBook() });
+  it(`/users/:id (GET)`, async () => {
+    const user = await prisma.user.create({ data: TestUtils.makeUser() });
 
     const response = await request(app.getHttpServer())
-      .get(`/books/${book?.id}`)
+      .get(`/users/${user.id}`)
       .expect(200);
 
     expect(response.body).toBeTruthy();
 
-    expect(response.body.id).toBe(book.id);
+    expect(response.body.id).toBe(user.id);
   });
 
-  it(`/books (POST)`, async () => {
-    const book = TestUtils.makeBook();
+  it(`/users (POST)`, async () => {
+    const user = TestUtils.makeUser();
 
     const response = await request(app.getHttpServer())
-      .post(`/books`)
-      .send(book)
+      .post(`/users`)
+      .send(user)
       .expect(201);
 
     expect(response.body).toBeTruthy();
 
     expect(response.body).toHaveProperty('id');
 
-    expect(response.body.name).toBe(book.name);
+    expect(response.body.name).toBe(user.name);
 
-    expect(response.body.author).toBe(book.author);
+    expect(response.body.email).toBe(user.email);
   });
 
-  it(`/books/:id (PATCH)`, async () => {
-    const book = await prisma.book.create({ data: TestUtils.makeBook() });
+  it(`/users/:id (PATCH)`, async () => {
+    const user = await prisma.user.create({ data: TestUtils.makeUser() });
 
     const response = await request(app.getHttpServer())
-      .patch(`/books/${book?.id}`)
+      .patch(`/users/${user.id}`)
       .send({ name: 'Jane Austen' })
       .expect(200);
 
@@ -78,11 +78,11 @@ describe('BooksController', () => {
     expect(response.body.name).toBe('Jane Austen');
   });
 
-  it(`/books/:id (DELETE)`, async () => {
-    const book = await prisma.book.create({ data: TestUtils.makeBook() });
+  it(`/users/:id (DELETE)`, async () => {
+    const user = await prisma.user.create({ data: TestUtils.makeUser() });
 
     const response = await request(app.getHttpServer())
-      .delete(`/books/${book?.id}`)
+      .delete(`/users/${user.id}`)
       .expect(200);
 
     expect(response.body).toBeTruthy();
