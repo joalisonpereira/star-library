@@ -13,7 +13,7 @@ async function bootstrap() {
 
   //Swagger
   const config = new DocumentBuilder()
-    .setTitle('Start Library')
+    .setTitle('Star Library')
     .setVersion('1.0')
     .build();
 
