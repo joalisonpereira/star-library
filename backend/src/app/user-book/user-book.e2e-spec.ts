@@ -47,7 +47,9 @@ describe('UserBookController', () => {
   });
 
   it(`/user-books (POST)`, async () => {
-    const userBook = TestHelper.makeUserBook();
+    const userBook = await createUserBook();
+
+    delete userBook.id;
 
     const response = await request(app.getHttpServer())
       .post(`/user-books`)
@@ -77,13 +79,9 @@ describe('UserBookController', () => {
   it(`/user-books/:id (DELETE)`, async () => {
     const userBook = await createUserBook();
 
-    const response = await request(app.getHttpServer())
+    await request(app.getHttpServer())
       .delete(`/user-books/${userBook.id}`)
-      .expect(200);
-
-    expect(response.body).toBeTruthy();
-
-    expect(response.body).toHaveProperty('id');
+      .expect(204);
   });
 
   async function createUserBook() {

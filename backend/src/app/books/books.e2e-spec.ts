@@ -81,12 +81,6 @@ describe('BooksController', () => {
   it(`/books/:id (DELETE)`, async () => {
     const book = await prisma.book.create({ data: TestHelper.makeBook() });
 
-    const response = await request(app.getHttpServer())
-      .delete(`/books/${book?.id}`)
-      .expect(200);
-
-    expect(response.body).toBeTruthy();
-
-    expect(response.body).toHaveProperty('id');
+    await request(app.getHttpServer()).delete(`/books/${book?.id}`).expect(204);
   });
 });

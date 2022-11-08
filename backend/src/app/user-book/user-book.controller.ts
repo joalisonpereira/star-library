@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import { UserBookService } from './user-book.service';
 import { CreateUserBookDto } from './dto/create-user-book.dto';
@@ -19,6 +21,7 @@ export class UserBookController {
 
   @Post()
   create(@Body() createUserBookDto: CreateUserBookDto) {
+    console.log(createUserBookDto);
     return this.userBookService.create(createUserBookDto);
   }
 
@@ -41,6 +44,7 @@ export class UserBookController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
     return this.userBookService.remove(+id);
   }

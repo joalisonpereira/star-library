@@ -81,12 +81,6 @@ describe('UsersController', () => {
   it(`/users/:id (DELETE)`, async () => {
     const user = await prisma.user.create({ data: TestHelper.makeUser() });
 
-    const response = await request(app.getHttpServer())
-      .delete(`/users/${user.id}`)
-      .expect(200);
-
-    expect(response.body).toBeTruthy();
-
-    expect(response.body).toHaveProperty('id');
+    await request(app.getHttpServer()).delete(`/users/${user.id}`).expect(204);
   });
 });
