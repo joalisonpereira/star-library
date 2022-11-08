@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TestUtils } from 'src/helpers/TestUtils';
+import { TestHelper } from 'src/helpers/test.helpers';
 import { UserBookController } from './user-book.controller';
 import { UserBookService } from './user-book.service';
 
@@ -26,7 +26,7 @@ describe('UserBookController', () => {
 
     service = module.get<UserBookService>(UserBookService);
 
-    TestUtils.resetMockObject(serviceMock);
+    TestHelper.resetMockObject(serviceMock);
   });
 
   it('should be defined', () => {
@@ -37,7 +37,7 @@ describe('UserBookController', () => {
 
   describe('create', () => {
     it('should create book', async () => {
-      const userBook = TestUtils.makeUserBook();
+      const userBook = TestHelper.makeUserBook();
 
       serviceMock.create.mockResolvedValue(userBook);
 
@@ -49,7 +49,7 @@ describe('UserBookController', () => {
 
   describe('findAll', () => {
     it('should return userBooks array', async () => {
-      const userBooks = [TestUtils.makeUserBook(), TestUtils.makeUserBook()];
+      const userBooks = [TestHelper.makeUserBook(), TestHelper.makeUserBook()];
 
       serviceMock.findAll.mockResolvedValue(userBooks);
 
@@ -61,7 +61,7 @@ describe('UserBookController', () => {
 
   describe('findOne', () => {
     it('should return userBook', async () => {
-      const userBook = TestUtils.makeUserBook();
+      const userBook = TestHelper.makeUserBook();
 
       serviceMock.findOne.mockResolvedValue(userBook);
 
@@ -75,7 +75,7 @@ describe('UserBookController', () => {
 
   describe('update', () => {
     it('should update book', async () => {
-      const userBook = TestUtils.makeUserBook();
+      const userBook = TestHelper.makeUserBook();
 
       serviceMock.update.mockResolvedValue(userBook);
 
@@ -89,7 +89,7 @@ describe('UserBookController', () => {
 
   describe('remove', () => {
     it('should remove book', async () => {
-      const userBook = TestUtils.makeUserBook();
+      const userBook = TestHelper.makeUserBook();
 
       serviceMock.remove.mockResolvedValue(userBook);
 

@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from 'src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { TestUtils } from 'src/helpers/TestUtils';
+import { TestHelper } from 'src/helpers/test.helpers';
 
 describe('UsersController', () => {
   let app: INestApplication;
@@ -35,7 +35,7 @@ describe('UsersController', () => {
   });
 
   it(`/users/:id (GET)`, async () => {
-    const user = await prisma.user.create({ data: TestUtils.makeUser() });
+    const user = await prisma.user.create({ data: TestHelper.makeUser() });
 
     const response = await request(app.getHttpServer())
       .get(`/users/${user.id}`)
@@ -47,7 +47,7 @@ describe('UsersController', () => {
   });
 
   it(`/users (POST)`, async () => {
-    const user = TestUtils.makeUser();
+    const user = TestHelper.makeUser();
 
     const response = await request(app.getHttpServer())
       .post(`/users`)
@@ -64,7 +64,7 @@ describe('UsersController', () => {
   });
 
   it(`/users/:id (PATCH)`, async () => {
-    const user = await prisma.user.create({ data: TestUtils.makeUser() });
+    const user = await prisma.user.create({ data: TestHelper.makeUser() });
 
     const response = await request(app.getHttpServer())
       .patch(`/users/${user.id}`)
@@ -79,7 +79,7 @@ describe('UsersController', () => {
   });
 
   it(`/users/:id (DELETE)`, async () => {
-    const user = await prisma.user.create({ data: TestUtils.makeUser() });
+    const user = await prisma.user.create({ data: TestHelper.makeUser() });
 
     const response = await request(app.getHttpServer())
       .delete(`/users/${user.id}`)

@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
-export class TestUtils {
+export class TestHelper {
   static makeUser(): Prisma.UserCreateManyInput {
     return {
       email: faker.internet.email(),

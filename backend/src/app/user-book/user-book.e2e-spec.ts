@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from 'src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { TestUtils } from 'src/helpers/TestUtils';
+import { TestHelper } from 'src/helpers/test.helpers';
 
 describe('UserBookController', () => {
   let app: INestApplication;
@@ -47,7 +47,7 @@ describe('UserBookController', () => {
   });
 
   it(`/user-books (POST)`, async () => {
-    const userBook = TestUtils.makeUserBook();
+    const userBook = TestHelper.makeUserBook();
 
     const response = await request(app.getHttpServer())
       .post(`/user-books`)
@@ -88,16 +88,16 @@ describe('UserBookController', () => {
 
   async function createUserBook() {
     const book = await prisma.book.create({
-      data: TestUtils.makeBook(),
+      data: TestHelper.makeBook(),
     });
 
     const user = await prisma.user.create({
-      data: TestUtils.makeUser(),
+      data: TestHelper.makeUser(),
     });
 
     const userBook = await prisma.userBook.create({
       data: {
-        ...TestUtils.makeUserBook(),
+        ...TestHelper.makeUserBook(),
         bookId: book.id,
         userId: user.id,
       },

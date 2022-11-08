@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from 'src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { TestUtils } from 'src/helpers/TestUtils';
+import { TestHelper } from 'src/helpers/test.helpers';
 
 describe('BooksController', () => {
   let app: INestApplication;
@@ -35,7 +35,7 @@ describe('BooksController', () => {
   });
 
   it(`/books/:id (GET)`, async () => {
-    const book = await prisma.book.create({ data: TestUtils.makeBook() });
+    const book = await prisma.book.create({ data: TestHelper.makeBook() });
 
     const response = await request(app.getHttpServer())
       .get(`/books/${book?.id}`)
@@ -47,7 +47,7 @@ describe('BooksController', () => {
   });
 
   it(`/books (POST)`, async () => {
-    const book = TestUtils.makeBook();
+    const book = TestHelper.makeBook();
 
     const response = await request(app.getHttpServer())
       .post(`/books`)
@@ -64,7 +64,7 @@ describe('BooksController', () => {
   });
 
   it(`/books/:id (PATCH)`, async () => {
-    const book = await prisma.book.create({ data: TestUtils.makeBook() });
+    const book = await prisma.book.create({ data: TestHelper.makeBook() });
 
     const response = await request(app.getHttpServer())
       .patch(`/books/${book?.id}`)
@@ -79,7 +79,7 @@ describe('BooksController', () => {
   });
 
   it(`/books/:id (DELETE)`, async () => {
-    const book = await prisma.book.create({ data: TestUtils.makeBook() });
+    const book = await prisma.book.create({ data: TestHelper.makeBook() });
 
     const response = await request(app.getHttpServer())
       .delete(`/books/${book?.id}`)

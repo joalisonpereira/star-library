@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TestUtils } from 'src/helpers/TestUtils';
+import { TestHelper } from 'src/helpers/test.helpers';
 import { BooksController } from './books.controller';
 import { BooksService } from './books.service';
 
@@ -26,7 +26,7 @@ describe('BooksController', () => {
 
     service = module.get<BooksService>(BooksService);
 
-    TestUtils.resetMockObject(serviceMock);
+    TestHelper.resetMockObject(serviceMock);
   });
 
   it('should be defined', () => {
@@ -37,7 +37,7 @@ describe('BooksController', () => {
 
   describe('create', () => {
     it('should create book', async () => {
-      const book = TestUtils.makeBook();
+      const book = TestHelper.makeBook();
 
       serviceMock.create.mockResolvedValue(book);
 
@@ -49,7 +49,7 @@ describe('BooksController', () => {
 
   describe('findAll', () => {
     it('should return books array', async () => {
-      const books = [TestUtils.makeBook(), TestUtils.makeBook()];
+      const books = [TestHelper.makeBook(), TestHelper.makeBook()];
 
       serviceMock.findAll.mockResolvedValue(books);
 
@@ -61,7 +61,7 @@ describe('BooksController', () => {
 
   describe('findOne', () => {
     it('should return book', async () => {
-      const book = TestUtils.makeBook();
+      const book = TestHelper.makeBook();
 
       serviceMock.findOne.mockResolvedValue(book);
 
@@ -73,7 +73,7 @@ describe('BooksController', () => {
 
   describe('update', () => {
     it('should update book', async () => {
-      const book = TestUtils.makeBook();
+      const book = TestHelper.makeBook();
 
       serviceMock.update.mockResolvedValue(book);
 
@@ -87,7 +87,7 @@ describe('BooksController', () => {
 
   describe('remove', () => {
     it('should remove book', async () => {
-      const book = TestUtils.makeBook();
+      const book = TestHelper.makeBook();
 
       serviceMock.remove.mockResolvedValue(book);
 

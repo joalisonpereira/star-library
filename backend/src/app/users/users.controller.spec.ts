@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TestUtils } from 'src/helpers/TestUtils';
+import { TestHelper } from 'src/helpers/test.helpers';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
@@ -26,7 +26,7 @@ describe('UsersController', () => {
 
     service = module.get<UsersService>(UsersService);
 
-    TestUtils.resetMockObject(serviceMock);
+    TestHelper.resetMockObject(serviceMock);
   });
 
   it('should be defined', () => {
@@ -37,7 +37,7 @@ describe('UsersController', () => {
 
   describe('create', () => {
     it('should create user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       serviceMock.create.mockResolvedValue(user);
 
@@ -49,7 +49,7 @@ describe('UsersController', () => {
 
   describe('findAll', () => {
     it('should return users array', async () => {
-      const users = [TestUtils.makeUser(), TestUtils.makeUser()];
+      const users = [TestHelper.makeUser(), TestHelper.makeUser()];
 
       serviceMock.findAll.mockResolvedValue(users);
 
@@ -61,7 +61,7 @@ describe('UsersController', () => {
 
   describe('findOne', () => {
     it('should return user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       serviceMock.findOne.mockResolvedValue(user);
 
@@ -73,7 +73,7 @@ describe('UsersController', () => {
 
   describe('update', () => {
     it('should update user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       serviceMock.update.mockResolvedValue(user);
 
@@ -87,7 +87,7 @@ describe('UsersController', () => {
 
   describe('remove', () => {
     it('should remove user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       serviceMock.remove.mockResolvedValue(user);
 

@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TestUtils } from 'src/helpers/TestUtils';
+import { TestHelper } from 'src/helpers/test.helpers';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserBookService } from './user-book.service';
 
@@ -27,7 +27,7 @@ describe('UserBookService', () => {
 
     service = module.get<UserBookService>(UserBookService);
 
-    TestUtils.resetMockObject(prismaMock.userBook);
+    TestHelper.resetMockObject(prismaMock.userBook);
   });
 
   it('should be defined', () => {
@@ -36,7 +36,7 @@ describe('UserBookService', () => {
 
   describe('findAll', () => {
     it('should be list all userBooks', async () => {
-      const userBooks = [TestUtils.makeUserBook(), TestUtils.makeUserBook()];
+      const userBooks = [TestHelper.makeUserBook(), TestHelper.makeUserBook()];
 
       prismaMock.userBook.findMany.mockResolvedValue(userBooks);
 
@@ -48,7 +48,7 @@ describe('UserBookService', () => {
 
   describe('findOne', () => {
     it('should be return an book', async () => {
-      const userBook = TestUtils.makeUserBook();
+      const userBook = TestHelper.makeUserBook();
 
       prismaMock.userBook.findUnique.mockResolvedValue(userBook);
 
@@ -58,7 +58,7 @@ describe('UserBookService', () => {
     });
 
     it('should be return an error when not find the book', async () => {
-      const userBook = TestUtils.makeUserBook();
+      const userBook = TestHelper.makeUserBook();
 
       prismaMock.userBook.findUnique.mockResolvedValue(null);
 
@@ -72,7 +72,7 @@ describe('UserBookService', () => {
 
   describe('create', () => {
     it('should create book', async () => {
-      const userBooks = TestUtils.makeUserBook();
+      const userBooks = TestHelper.makeUserBook();
 
       prismaMock.userBook.create.mockResolvedValue(userBooks);
 
@@ -84,7 +84,7 @@ describe('UserBookService', () => {
 
   describe('update', () => {
     it('should update book', async () => {
-      const userBook = TestUtils.makeUserBook();
+      const userBook = TestHelper.makeUserBook();
 
       prismaMock.userBook.findUnique.mockResolvedValue(userBook);
 
@@ -98,7 +98,7 @@ describe('UserBookService', () => {
     });
 
     it('should be return an error when not update the book', async () => {
-      const userBook = TestUtils.makeUserBook();
+      const userBook = TestHelper.makeUserBook();
 
       prismaMock.userBook.findUnique.mockResolvedValue(null);
 
@@ -111,7 +111,7 @@ describe('UserBookService', () => {
   });
 
   describe('delete', () => {
-    const userBook = TestUtils.makeUserBook();
+    const userBook = TestHelper.makeUserBook();
 
     it('should delete book', async () => {
       prismaMock.userBook.findUnique.mockReturnValue(userBook);
@@ -124,7 +124,7 @@ describe('UserBookService', () => {
     });
 
     it('should be return an error when not delete the book', async () => {
-      const userBook = TestUtils.makeUserBook();
+      const userBook = TestHelper.makeUserBook();
 
       prismaMock.userBook.findUnique.mockResolvedValue(null);
 

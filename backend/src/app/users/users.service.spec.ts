@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TestUtils } from 'src/helpers/TestUtils';
+import { TestHelper } from 'src/helpers/test.helpers';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UsersService } from './users.service';
 
@@ -27,7 +27,7 @@ describe('UsersService', () => {
 
     service = module.get<UsersService>(UsersService);
 
-    TestUtils.resetMockObject(prismaMock.user);
+    TestHelper.resetMockObject(prismaMock.user);
   });
 
   it('should be defined', () => {
@@ -36,7 +36,7 @@ describe('UsersService', () => {
 
   describe('findAll', () => {
     it('should be list all users', async () => {
-      const users = [TestUtils.makeUser(), TestUtils.makeUser()];
+      const users = [TestHelper.makeUser(), TestHelper.makeUser()];
 
       prismaMock.user.findMany.mockResolvedValue(users);
 
@@ -48,7 +48,7 @@ describe('UsersService', () => {
 
   describe('findOne', () => {
     it('should be return an user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       prismaMock.user.findUnique.mockResolvedValue(user);
 
@@ -58,7 +58,7 @@ describe('UsersService', () => {
     });
 
     it('should be return an error when not find the user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       prismaMock.user.findUnique.mockResolvedValue(null);
 
@@ -70,7 +70,7 @@ describe('UsersService', () => {
 
   describe('create', () => {
     it('should create user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       prismaMock.user.create.mockResolvedValue(user);
 
@@ -82,7 +82,7 @@ describe('UsersService', () => {
 
   describe('update', () => {
     it('should update user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       prismaMock.user.findUnique.mockResolvedValue(user);
 
@@ -94,7 +94,7 @@ describe('UsersService', () => {
     });
 
     it('should be return an error when not update the user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       prismaMock.user.findUnique.mockResolvedValue(null);
 
@@ -107,7 +107,7 @@ describe('UsersService', () => {
   });
 
   describe('delete', () => {
-    const user = TestUtils.makeUser();
+    const user = TestHelper.makeUser();
 
     it('should delete user', async () => {
       prismaMock.user.findUnique.mockReturnValue(user);
@@ -120,7 +120,7 @@ describe('UsersService', () => {
     });
 
     it('should be return an error when not delete the user', async () => {
-      const user = TestUtils.makeUser();
+      const user = TestHelper.makeUser();
 
       prismaMock.user.findUnique.mockResolvedValue(null);
 
