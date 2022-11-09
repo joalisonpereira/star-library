@@ -1,7 +1,11 @@
-import { hash } from 'bcrypt';
+import { compareSync, hashSync } from 'bcrypt';
 
 export class PasswordHelper {
-  static async hash(value: string) {
-    return await hash(value, 10);
+  static hash(value: string) {
+    return hashSync(value, 10);
+  }
+
+  static compare(password: string, hashPassword: string) {
+    return compareSync(password.toString(), hashPassword.toString());
   }
 }

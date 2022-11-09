@@ -8,13 +8,7 @@ describe('UserBookService', () => {
   let service: UserBookService;
 
   const prismaMock = {
-    userBook: {
-      create: jest.fn(),
-      findMany: jest.fn(),
-      findUnique: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-    },
+    userBook: TestHelper.getPrismaMockObject(),
   };
 
   beforeEach(async () => {

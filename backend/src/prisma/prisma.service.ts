@@ -7,7 +7,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   async onModuleInit() {
     await this.$connect();
 
-    await this.$use(async (params, next) => {
+    this.$use(async (params, next) => {
       if (
         params.model === 'User' &&
         (params.action === 'create' || params.action === 'update')
@@ -15,7 +15,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
         const { password } = params.args.data;
 
         if (password) {
-          params.args.data.password = await PasswordHelper.hash(password);
+          params.args.data.password = PasswordHelper.hash(password);
         }
       }
 

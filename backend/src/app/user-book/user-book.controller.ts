@@ -8,23 +8,19 @@ import {
   Delete,
   HttpStatus,
   HttpCode,
-  UseGuards,
 } from '@nestjs/common';
 import { UserBookService } from './user-book.service';
 import { CreateUserBookDto } from './dto/create-user-book.dto';
 import { UpdateUserBookDto } from './dto/update-user-book.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('user-books')
 @Controller('user-books')
-@UseGuards(AuthGuard('jwt'))
 export class UserBookController {
   constructor(private readonly userBookService: UserBookService) {}
 
   @Post()
   create(@Body() createUserBookDto: CreateUserBookDto) {
-    console.log(createUserBookDto);
     return this.userBookService.create(createUserBookDto);
   }
 

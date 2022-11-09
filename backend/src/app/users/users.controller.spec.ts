@@ -6,15 +6,7 @@ import { UsersService } from './users.service';
 describe('UsersController', () => {
   let controller: UsersController;
 
-  let service: UsersService;
-
-  const serviceMock = {
-    create: jest.fn(),
-    findAll: jest.fn(),
-    findOne: jest.fn(),
-    update: jest.fn(),
-    remove: jest.fn(),
-  };
+  const serviceMock = TestHelper.getResourceMockObject();
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -24,15 +16,11 @@ describe('UsersController', () => {
 
     controller = module.get<UsersController>(UsersController);
 
-    service = module.get<UsersService>(UsersService);
-
     TestHelper.resetMockObject(serviceMock);
   });
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
-
-    expect(service).toBeDefined();
   });
 
   describe('create', () => {
@@ -43,7 +31,7 @@ describe('UsersController', () => {
 
       await expect(controller.create(user)).resolves.toBe(user);
 
-      expect(service.create).toHaveBeenCalledTimes(1);
+      expect(serviceMock.create).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -55,7 +43,7 @@ describe('UsersController', () => {
 
       await expect(controller.findAll()).resolves.toBe(users);
 
-      expect(service.findAll).toHaveBeenCalledTimes(1);
+      expect(serviceMock.findAll).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -67,7 +55,7 @@ describe('UsersController', () => {
 
       await expect(controller.findOne(String(user.id))).resolves.toBe(user);
 
-      expect(service.findOne).toHaveBeenCalledTimes(1);
+      expect(serviceMock.findOne).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -81,7 +69,7 @@ describe('UsersController', () => {
         user,
       );
 
-      expect(service.update).toHaveBeenCalledTimes(1);
+      expect(serviceMock.update).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -93,7 +81,7 @@ describe('UsersController', () => {
 
       await expect(controller.remove(String(user.id))).resolves.toBe(user);
 
-      expect(service.remove).toHaveBeenCalledTimes(1);
+      expect(serviceMock.remove).toHaveBeenCalledTimes(1);
     });
   });
 });

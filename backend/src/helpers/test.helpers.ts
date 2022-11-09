@@ -1,12 +1,16 @@
 import { Prisma } from '@prisma/client';
 import { faker } from '@faker-js/faker';
+import { PasswordHelper } from './password.helpers';
 
 export class TestHelper {
-  static makeUser(): Prisma.UserCreateManyInput {
+  static makeUser(
+    data: Partial<Prisma.UserCreateManyInput> = {},
+  ): Prisma.UserCreateManyInput {
     return {
       email: faker.internet.email(),
       name: faker.name.fullName(),
-      password: faker.internet.password(),
+      ...data,
+      password: PasswordHelper.hash(data.password ?? faker.internet.password()),
     };
   }
 
@@ -29,5 +33,25 @@ export class TestHelper {
     [key: string]: ReturnType<typeof jest.fn>;
   }) {
     Object.entries(mockObject).forEach(([, fc]) => fc.mockReset());
+  }
+
+  static getPrismaMockObject() {
+    return {
+      create: jest.fn(),
+      findMany: jest.fn(),
+      findUnique: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+    };
+  }
+
+  static getResourceMockObject() {
+    return {
+      create: jest.fn(),
+      findAll: jest.fn(),
+      findOne: jest.fn(),
+      update: jest.fn(),
+      remove: jest.fn(),
+    };
   }
 }
