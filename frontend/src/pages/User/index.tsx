@@ -32,7 +32,7 @@ function User({}: UserProps) {
       <Container className="container">
         <div className="d-flex justify-content-between align-items-center mt-3">
           <h3>Usuários</h3>
-          <Button onClick={openModal} variant="primary">
+          <Button onClick={openModal} variant="primary" data-testid="add">
             Novo
           </Button>
         </div>
