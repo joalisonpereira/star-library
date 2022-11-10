@@ -5,12 +5,14 @@ import { AuthActions } from "../slices/auth";
 
 function* signIn({ payload }: ReturnType<typeof AuthActions.signIn>) {
   try {
-    const { data } = yield call<any>(api.post, {
+    const { data } = yield call<any>(api.post, "/auth/login", {
       email: payload.email,
       password: payload.password,
     });
 
-    yield put(AuthActions.signInSuccess(data.accessToken));
+    yield put(AuthActions.signInSuccess(data.token));
+
+    sessionStorage.setItem(StorageKeys.accessToken, data.token);
   } catch (error) {
     yield put(AuthActions.signInError());
   }

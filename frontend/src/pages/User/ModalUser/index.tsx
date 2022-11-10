@@ -24,18 +24,6 @@ function ModalUser(props: ModalUserProps) {
     },
   });
 
-  // useEffect(() => {
-  //   if (!modal) {
-  //     formik
-  //       .setValues({
-  //         name: "",
-  //         email: "",
-  //         password: "",
-  //       })
-  //       .catch(() => {});
-  //   }
-  // }, [modal, formik]);
-
   function closeModal() {
     dispatch(UserActions.setModal(false));
   }

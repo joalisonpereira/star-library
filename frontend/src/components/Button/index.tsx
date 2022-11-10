@@ -11,7 +11,7 @@ function Button({ loading, children, ...props }: ButtonProps) {
     <Container {...props}>
       {loading ? (
         <div className="loadingContainer">
-          <Spinner animation="border" />
+          <Spinner animation="border" data-testid="spinner" />
           <span className="label">Carregando...</span>
         </div>
       ) : (

@@ -23,25 +23,13 @@ function ModalBook(props: ModalBookProps) {
     },
   });
 
-  // useEffect(() => {
-  //   if (!modal) {
-  //     formik
-  //       .setValues({
-  //         name: "",
-  //         email: "",
-  //         password: "",
-  //       })
-  //       .catch(() => {});
-  //   }
-  // }, [modal, formik]);
-
   function closeModal() {
     dispatch(BookActions.setModal(false));
   }
 
   return (
     <Container {...props} show={modal} onHide={closeModal}>
-      <Container.Header closeButton>Usuário</Container.Header>
+      <Container.Header closeButton>Livro</Container.Header>
       <form onSubmit={formik.handleSubmit}>
         <Container.Body>
           <FormGroup>
@@ -57,7 +45,7 @@ function ModalBook(props: ModalBookProps) {
             <label className="text-white">Autor</label>
             <Input
               type="text"
-              placeholder="Livro"
+              placeholder="Autor"
               onChange={formik.handleChange("author")}
               value={formik.values.author}
             />
