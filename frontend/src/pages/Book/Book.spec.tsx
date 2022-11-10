@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import App from "src/App";
@@ -42,20 +42,18 @@ describe("pages/Book", () => {
       </App>
     );
 
-    await waitFor(() => {
-      userEvent.click(getByTestId("add"));
+    userEvent.click(getByTestId("add"));
 
-      const nameInput = getByPlaceholderText("Nome");
+    const nameInput = getByPlaceholderText("Nome");
 
-      userEvent.type(nameInput, "Teste Livro");
+    userEvent.type(nameInput, "Teste Livro");
 
-      const authorInput = getByPlaceholderText("Autor");
+    const authorInput = getByPlaceholderText("Autor");
 
-      userEvent.type(authorInput, "Teste autor");
+    userEvent.type(authorInput, "Teste autor");
 
-      expect(nameInput).toHaveValue("Teste Livro");
+    expect(nameInput).toHaveValue("Teste Livro");
 
-      expect(authorInput).toHaveValue("Teste autor");
-    });
+    expect(authorInput).toHaveValue("Teste autor");
   });
 });
