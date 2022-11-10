@@ -17,8 +17,8 @@ describe("pages/Login", () => {
     expect(getByText("Login")).toBeInTheDocument();
   });
 
-  it("should signin", async () => {
-    const { getByPlaceholderText, getByText } = render(
+  it("should try signin", async () => {
+    const { getByPlaceholderText, getByText, getByTestId } = render(
       <App>
         <BrowserRouter>
           <Login />
@@ -37,7 +37,7 @@ describe("pages/Login", () => {
     userEvent.click(getByText("Entrar"));
 
     await waitFor(() => {
-      expect(getByText("Usuários")).toBeInTheDocument();
+      expect(getByTestId("spinner")).toBeInTheDocument();
     });
   });
 });

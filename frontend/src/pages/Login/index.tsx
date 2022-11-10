@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { FormGroup } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "src/components/Button";
 import Input from "src/components/Input";
 import Layout from "src/components/Layout";
@@ -11,6 +11,8 @@ export interface LoginProps {}
 
 function Login({}: LoginProps) {
   const dispatch = useDispatch();
+
+  const loading = useSelector((state) => state.auth.loading);
 
   const formik = useFormik({
     initialValues: {
@@ -48,7 +50,7 @@ function Login({}: LoginProps) {
                 />
               </FormGroup>
               <div className="d-grid mt-5">
-                <Button variant="primary" type="submit">
+                <Button loading={loading} variant="primary" type="submit">
                   Entrar
                 </Button>
               </div>
