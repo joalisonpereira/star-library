@@ -3,7 +3,7 @@
 </h1>
 
 <p align="left">
-  Dummy library system
+  Dummy library system using ReactJS and NestJS with unit tests.
 </p>
 
 ## Author
